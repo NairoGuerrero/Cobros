@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container mt-5 d-flex justify-content-center align-items-center"
+         style="min-height: 50vh; padding-bottom: 5vh;">
+        <div class="card shadow-lg p-2" style="max-width: 1000px; width: 100%;">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Cobradores</h2>
+                <!-- Agregar un div con overflow-x: auto -->
+                <div class="table-responsive">
+                    <table id="usuarios" class="display nowrap cell-border table-striped w-100"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para cambiar la contraseña -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">Cambiar Contraseña</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="passwordUserId">
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                        <input type="password" class="form-control" id="newPassword">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="changeUserPassword()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        URL_DATA = '{% url 'usuarios_app:usuarios_json' %}';
+        URL_IS_ACTIVE = "{% url 'usuarios_app:toggle_user_status' 0 %}";
+        URL_CHANGE_PASSWORD = "{% url 'usuarios_app:change_password' 0 %}";
+    </script>
+    <script src="{% static 'js/usuarios/lista_usuarios.js' %}"></script>
+{% endblock %}

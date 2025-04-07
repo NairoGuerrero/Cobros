@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container mt-5 d-flex justify-content-center align-items-center"
+         style="min-height: 50vh; padding-bottom: 5vh;">
+        <div class="card shadow-lg p-2" style="max-width: 1000px; width: 100%;">
+            <div class="card-body">
+                <h2 class="text-center mb-4">Clientes</h2>
+                <!-- Agregar un div con overflow-x: auto -->
+                <div class="table-responsive">
+                    <table id="clientes" class="display nowrap cell-border table-striped w-100"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        URL_DATA = '{% url 'cobros_app:clientes_json' %}';
+    </script>
+    <script src="{% static 'js/clientes/lista_clientes.js' %}"></script>
+{% endblock %}
